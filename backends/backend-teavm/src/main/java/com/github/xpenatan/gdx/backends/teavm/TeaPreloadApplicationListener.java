@@ -46,11 +46,13 @@ public class TeaPreloadApplicationListener extends ApplicationAdapter {
     private int assetsCount = -1;
     private boolean isAnimation = false;
     private int initStage = 0;
+    private TeaPreloadProgressListener progressListener;
 
     @Override
     public void create() {
         teaApplication = TeaApplication.get();
         assetLoader = AssetInstance.getLoaderInstance();
+        progressListener = teaApplication.getConfig().preloadProgressListener;
         setupPreloadAssets();
     }
 
@@ -178,6 +180,9 @@ public class TeaPreloadApplicationListener extends ApplicationAdapter {
             if(assetsCount >= 0) {
                 int queue = assetLoader.getQueue();
                 float progress = (float)(assetsCount - queue) / assetsCount;
+                if(progressListener != null) {
+                    progressListener.onProgress(progress);
+                }
                 if(!isAnimation) {
                     targetProgress = progress;
                 }
