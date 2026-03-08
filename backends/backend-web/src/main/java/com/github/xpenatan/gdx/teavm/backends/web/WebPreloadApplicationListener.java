@@ -187,6 +187,9 @@ public class WebPreloadApplicationListener extends ApplicationAdapter {
             if(assetsCount >= 0) {
                 int queue = assetLoader.getQueue();
                 float progress = (float)(assetsCount - queue) / assetsCount;
+                if(config.preloadProgressListener != null) {
+                    config.preloadProgressListener.onProgress(progress);
+                }
                 if(!isAnimation) {
                     targetProgress = progress;
                 }

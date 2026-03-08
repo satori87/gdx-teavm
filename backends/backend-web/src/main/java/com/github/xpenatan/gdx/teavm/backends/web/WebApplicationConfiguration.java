@@ -98,6 +98,12 @@ public class WebApplicationConfiguration {
     public WebAssetPreloadListener preloadListener;
 
     /**
+     * Optional listener called each frame during asset preloading with the current
+     * download progress (0.0 to 1.0). Useful for driving a custom HTML loading overlay.
+     */
+    public WebPreloadProgressListener preloadProgressListener;
+
+    /**
      * Base Url provider. Implement to customize the base url for assets loading.
      */
     public WebBaseUrlProvider baseUrlProvider = new WebDefaultBaseUrlProvider();
